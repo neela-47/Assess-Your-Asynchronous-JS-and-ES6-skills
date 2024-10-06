@@ -1,3 +1,4 @@
+// categories
 const loadCategories = () =>{
     fetch(`https://openapi.programming-hero.com/api/peddy/categories`)
     .then((res) => res.json())
@@ -8,21 +9,27 @@ const loadCategories = () =>{
 const displayCategory = (data) => {
     const categoryContainer = document.getElementById('categories')
  data.forEach((item) =>{
-    const button =document.createElement("button");
-    button.classList="btn btn-lg";
-    button.innerHTML= `
-    <div class="flex justify-center items-center gap-3 px-16  ">
-    <img class="w-8  " src="${item.category_icon}">
-    <p>${item.category}</p>
-    </div>
-    `
-   
-    
-    categoryContainer.append(button);
+    const buttonContainer =document.createElement("div");
+   buttonContainer.innerHTML=
+   `
+   <button class="btn btn-lg px-16" id="${item.category}" onclick="loadPetsByCategory (${item.category})">
+ <img class="w-8  " src="${item.category_icon}">
+ ${item.category}
+   </button>
+   `
+    categoryContainer.append(buttonContainer);
     
  })
 };
 
+// load pets by category
+const loadPetsByCategory = (id)=>{
+  
+   
+};
+
+
+// all pets
 const loadPets= () =>{
     fetch(`https://openapi.programming-hero.com/api/peddy/pets`)
     .then((res) => res.json())
@@ -82,3 +89,4 @@ const displayLoadPets = (pet) =>{
 
 loadCategories();
 loadPets();
+loadPetsByCategory();
