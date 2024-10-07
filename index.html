@@ -57,10 +57,17 @@
 
         </div>
       </section>
+      <section class="w-11/12 mx-auto mb-6">
+        <div class="flex justify-between items-center mb-4">
+            <p class="font-bold text-[1.25rem]">Best Deal for you</p>
+            <button class="btn bg-[#0E7A81] text-white px-5">Sorted by price</button>
+        </div>
+      </section>
       <!-- all pets -->
-       <section id="all-pets" class="w-11/12 mx-auto">
-       <div></div>
-       <div></div>
+       <section  class="w-11/12 mx-auto grid grid-cols-4">
+        
+       <div id="all-pets" class="col-span-3 border-[2px] border-red-700 grid grid-cols-3"></div>
+       <div class="col-span-1"></div>
        </section>
     </main>
 
@@ -97,6 +104,20 @@
                 <input class="rounded-xl p-4 bg-[#0E7A81] w-full" type="submit" aria-placeholder="Subscribe">
              </div>
         </section>
+        <!-- modal -->
+         <!-- Open the modal using ID.showModal() method -->
+<button id="showModalData" class="btn hidden" onclick="customModal.showModal()">open modal</button>
+<dialog id="customModal" class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box">
+   <div id="modal-content"></div>
+    <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>
     </footer>
 
     <script src="js/fetch.js"></script>
