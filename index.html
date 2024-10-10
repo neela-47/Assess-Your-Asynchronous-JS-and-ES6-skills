@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Assess-Your-Asynchronous-JS-and-ES6-skills</title>
+    <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.12/dist/full.min.css" rel="stylesheet" type="text/css" />
    <script src="https://cdn.tailwindcss.com"></script>
    <script src="https://kit.fontawesome.com/1fb3628ce7.js" crossorigin="anonymous"></script>
@@ -15,6 +16,38 @@
  </style>
 </head>
 <body class="lato-regular">
+ <!-- adopt modal -->
+ 
+<!-- Open the modal using ID.showModal() method -->
+<button id="adoptModal" class="btn hidden" onclick="my_modal_5.showModal()">open modal</button>
+<dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box">
+   <div id="adoptDetail">
+
+   </div>
+    <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <!-- <button class="btn">Close</button> -->
+      </form>
+    </div>
+  </div>
+</dialog>
+<!--detail modal -->
+         <!-- Open the modal using ID.showModal() method -->
+         <button id="showModalData" class="btn hidden" onclick="customModal.showModal()">open modal</button>
+         <dialog id="customModal" class="modal modal-bottom sm:modal-middle">
+           <div class="modal-box">
+            <div id="modal-content"></div>
+             <div class="modal-action">
+               <form method="dialog">
+                 <!-- if there is a button in form, it will close the modal -->
+                 <button class="btn">Close</button>
+               </form>
+             </div>
+           </div>
+         </dialog>
+
     <header class="w-11/12 mx-auto">
         <nav class="flex justify-between items-center pt-12">
             <div class="flex gap-1">
@@ -47,6 +80,7 @@
          
     </header>
     <main>
+       
         <!-- adopt your best friend -->
     <section id="scrolable" class="w-11/12 mx-auto mt-8 ">
         <div class="text-center">
@@ -57,17 +91,24 @@
 
         </div>
       </section>
-      <section class="w-11/12 mx-auto mb-6">
-        <div class="flex justify-between items-center mb-4">
-            <p class="font-bold text-[1.25rem]">Best Deal for you</p>
-            <button class="btn bg-[#0E7A81] text-white px-5">Sorted by price</button>
-        </div>
-      </section>
+       <!-- loading -->
+       <span id="loadingSpinner" class="justify-center loading loading-dots loading-lg hidden"></span>
+     
+      
+     
       <!-- all pets -->
        <section  class="w-11/12 mx-auto grid grid-cols-4">
+        <div class="col-span-4">
+          <div class="flex justify-between items-center mb-4">
+          <p class="font-bold text-[1.25rem]">Best Deal for you</p>
+          <button id="sorted-price" onclick="loadSortedPrice('${item.price}')" class="btn bg-[#0E7A81] text-white px-5">Sorted by price</button>
+      </div></div>
+       <div id="all-pets" class="col-span-3  grid grid-cols-3">
         
-       <div id="all-pets" class="col-span-3 border-[2px] border-red-700 grid grid-cols-3"></div>
-       <div class="col-span-1"></div>
+       </div>
+       <div id="liked-photo" class="col-span-1 grid grid-cols-2">
+
+       </div>
        </section>
     </main>
 
@@ -104,20 +145,7 @@
                 <input class="rounded-xl p-4 bg-[#0E7A81] w-full" type="submit" aria-placeholder="Subscribe">
              </div>
         </section>
-        <!-- modal -->
-         <!-- Open the modal using ID.showModal() method -->
-<button id="showModalData" class="btn hidden" onclick="customModal.showModal()">open modal</button>
-<dialog id="customModal" class="modal modal-bottom sm:modal-middle">
-  <div class="modal-box">
-   <div id="modal-content"></div>
-    <div class="modal-action">
-      <form method="dialog">
-        <!-- if there is a button in form, it will close the modal -->
-        <button class="btn">Close</button>
-      </form>
-    </div>
-  </div>
-</dialog>
+        
     </footer>
 
     <script src="js/fetch.js"></script>
