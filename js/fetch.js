@@ -15,7 +15,7 @@ const displayCategory = (data) => {
    `
    <div class=" ">
    <div>
-   <button id="id-${item.category}" onclick="loadSpinner(), changeColor(event), loadPetsByCategory ('${item.category}')" class="btn btn-lg lg:px-16 md:px-16 px-10 btn-category " id="${item.category}" >
+   <button id="id-${item.category}" onclick="changeColor(event), loadPetsByCategory ('${item.category}')" class="btn btn-lg lg:px-16 md:px-16 px-10 btn-category " id="${item.category}" >
  <img class="w-8 category-btn" src="${item.category_icon}" >
  ${item.category}
    </button>
@@ -26,19 +26,10 @@ const displayCategory = (data) => {
     
  })
 };
-// spinner
-const loadSpinner= ()=>{
-  console.log('added');
-  document.getElementById('spinner').style.display='block';
-  setTimeout(function(){
-    loadPetsByCategory();
-  }, 3000);
-}
-
-
 
 // active button;
 function changeColor(event) {
+  
 const buttons = document.querySelectorAll('.btn-category');
 // Reset all buttons to default background
   buttons.forEach(button => {
@@ -56,21 +47,33 @@ const buttons = document.querySelectorAll('.btn-category');
 
 // load pets by category
 const loadPetsByCategory = (id)=>{
-  document.getElementById('spinner').style.display="none";
-  console.log('few sec letter');
+  const loader = document.getElementById('loadingSpinner');
+  loader.classList.remove("hidden")
    fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
   .then((res) => res.json())
-  .then((data) => displayLoadPets(data.data))
+  .then((data) => {
+    setTimeout(function(){
+      loader.classList.add("hidden")
+      displayLoadPets(data.data)
+    }, 3000);
+    })
   .catch((error) => console.log('errored'))
 };
 loadPetsByCategory();
 
 // all pets
 const loadPets= () =>{
-  
+  const loader = document.getElementById('loadingSpinner');
+  loader.classList.remove("hidden")
      fetch(`https://openapi.programming-hero.com/api/peddy/pets`)
     .then((res) => res.json())
-    .then((data) =>displayLoadPets(data.pets))
+    .then((data) =>{
+      setTimeout(function(){
+        loader.classList.add("hidden")
+        displayLoadPets(data.pets)
+      }, 3000);
+      
+      })
     .catch((error) => console.log('errored'))
 }
 const displayLoadPets = (pet) =>{
@@ -119,7 +122,7 @@ const petsContainer = document.getElementById('all-pets');
 
    <div class="my-4  ">
    <button onclick= "showLikedPhoto('${item.image}')" id="id-${item.image}" class="btn text-[#0E7A81]"><i class="fa-solid fa-thumbs-up"></i></button>
-   <button id="adopted" onclick="addCountDown(), loadAdoptModal(),changeText() " class="btn text-[#0E7A81]">Adopt</button>
+   <button id="adopted-${item.petId}" onclick="addCountDown(), loadAdoptModal(),changeText(${item.petId})" class="btn text-[#0E7A81]">Adopt</button>
    <button onclick=loadPetDetails("${item.petId}") class="btn text-[#0E7A81]">Details</button>
    </div>
   
@@ -152,9 +155,7 @@ const loadSortedPrice = () =>{
 
 //adopt modal
 const loadAdoptModal = () =>{
-  // addCountDown();
-  console.log('addopted');
-  const adoptModuleContainer = document.getElementById('adoptDetail');
+ const adoptModuleContainer = document.getElementById('adoptDetail');
   adoptModuleContainer.innerHTML=`
  <div class="text-center">
   <img class="pl-40" src=${'https://img.icons8.com/?size=100&id=PEmFcgjhBgKF&format=png&color=000000'}>
@@ -166,9 +167,11 @@ document.getElementById("adoptModal").click();
 
 }
 // adopt modal innerText
-const changeText =() => {
-  console.log('changed')
-  const changeTextContainer = document.getElementById('adopted').innerText="Adoppted";
+const changeText =(id) => {
+ 
+  const changeTextContainer = document.getElementById(`adopted-${id}`);
+  console.log(changeTextContainer)
+  changeTextContainer.innerText="Adopted"
 }
 // count down
 const addCountDown = () =>{
