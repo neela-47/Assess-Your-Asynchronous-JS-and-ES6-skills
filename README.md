@@ -11,7 +11,7 @@ In this project we have different categories of pets. Here every pets have their
  e. We can like them by clicking like button.
 
  # 4. ES6 features used
-  a.Fetching
+  <p>a.Fetching</p>
   b.Load Data
   c.Display Data
   d.Function
