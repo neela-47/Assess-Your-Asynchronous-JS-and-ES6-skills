@@ -15,7 +15,7 @@ const displayCategory = (data) => {
    `
    <div class=" ">
    <div>
-   <button id="id-${item.category}" onclick="changeColor(event), loadPetsByCategory ('${item.category}')" class="btn btn-lg lg:px-16 md:px-16 px-10 btn-category " id="${item.category}" >
+   <button id="id-${item.category}" onclick="changeColor(event),loadPetsByCategory('${item.category}')" class="btn btn-lg lg:px-16 md:px-16 px-10 btn-category " id="${item.category}" >
  <img class="w-8 category-btn" src="${item.category_icon}" >
  ${item.category}
    </button>
@@ -52,25 +52,26 @@ const loadPetsByCategory = (id)=>{
    fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
   .then((res) => res.json())
   .then((data) => {
-    setTimeout(function(){
+    console.log(data)
+    setTimeout(function(){    
       loader.classList.add("hidden")
       displayLoadPets(data.data)
     }, 3000);
     })
   .catch((error) => console.log('errored'))
 };
-loadPetsByCategory();
+// loadPetsByCategory();
 
 // all pets
 const loadPets= () =>{
   const loader = document.getElementById('loadingSpinner');
-  loader.classList.remove("hidden")
+  loader.classList.remove("hidden");
      fetch(`https://openapi.programming-hero.com/api/peddy/pets`)
     .then((res) => res.json())
     .then((data) =>{
       setTimeout(function(){
-        loader.classList.add("hidden")
-        displayLoadPets(data.pets)
+        loader.classList.add("hidden");
+        displayLoadPets(data.pets);
       }, 3000);
       
       })
@@ -78,20 +79,21 @@ const loadPets= () =>{
 }
 const displayLoadPets = (pet) =>{
 const petsContainer = document.getElementById('all-pets');
-   petsContainer.innerHTML="";
+ petsContainer.innerHTML="";
+const notFoundContainer = document.getElementById('not-found');
+
    if(pet.length==0)
     {
-        petsContainer.classList.remove("grid");
-        petsContainer.innerHTML=`
-        <div class="h-[300px] flex flex-col justify-center items-center lg:ml-80">
-        <img src="images/error.webp">
-        <p class="font-bold text-2xl">No Content Here!!</p>
-        </div>
-        `;
-        return;
+      petsContainer.classList.remove("grid");
+      petsContainer.classList.add('hidden');
+      notFoundContainer.classList.remove("hidden");
+      return;
     }
     else{
-        petsContainer.classList.add("grid")
+        petsContainer.classList.add("grid");
+        petsContainer.classList.remove("hidden");
+        notFoundContainer.classList.add("hidden");
+       
     }
    pet.forEach((item) => {
     const div = document.createElement('div');
@@ -116,7 +118,7 @@ const petsContainer = document.getElementById('all-pets');
     </div>
    <div class="flex gap-2">
     <i class="fa-solid fa-dollar-sign"></i>
-     <p id="sorted">Price: ${item.price?.length==0? "Undefined" : `${item.price}`}</p>
+     <p>Price: ${item.price?.length==0? "Undefined" : `${item.price}`}</p>
     </div>
     </div>
 
@@ -132,12 +134,6 @@ const petsContainer = document.getElementById('all-pets');
 petsContainer.append(div);
  })
 };
-
-// sorting
-const loadSortedPrice = () =>{
-  console.log('sorted')
-  
-}
 
 //like button
  const showLikedPhoto = (image) =>{

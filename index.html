@@ -55,16 +55,18 @@
                 <img class="w-7 h-7" src="images/logo.webp" alt="">
                 <p class="font-bold text-xl">Paddy</p>
             </div>
-            <div class="flex gap-20">
+            <div class="lg:flex md:flex gap-20 hidden">
              <ul class="flex gap-5">
                 <li>Home</li>
                 <li>Shop</li>
                 <li>Contact</li>
              </ul>
-             
-            </div>
+           </div>
             <div>
                 <img class="w-7 h-7" src="https://img.icons8.com/?size=100&id=107049&format=png&color=000000" alt="">
+            </div >
+            <div class="lg:hidden md:hidden">
+              <i class="fa-solid fa-bars "></i>
             </div>
         </nav>
         <!-- banner -->
@@ -97,23 +99,27 @@
         </section>
       </section>
        <!-- loading -->
-       <span id="loadingSpinner" class="justify-center loading loading-dots loading-lg lg:ml-[600px]"></span>
+       <span id="loadingSpinner" class="justify-center loading loading-dots loading-lg lg:ml-[600px] md:ml-[300px] ml-[170px]"></span>
      
       <section class="w-11/12 mx-auto">
         <div class="col-span-4 ">
           <div class="flex justify-between items-center mb-4">
           <p class="font-bold text-[1.25rem]">Best Deal for you</p>
-          <button id="sorted-price" onclick="loadSortedPrice()" class="btn bg-[#0E7A81] text-white px-5">Sorted by price</button>
+          <button id="sorted-btn" class="btn bg-[#0E7A81] text-white px-5">Sorted by price</button>
       </div></div>
       </section>
      
       <!-- all pets -->
        <section  class="w-11/12 mx-auto lg:grid lg:grid-cols-4 flex flex-col-reverse  ">
+        <div id="not-found" class="h-[300px] hidden flex-col justify-center items-center lg:ml-80">
+          <img src="images/error.webp">
+          <p class="font-bold text-2xl">No Content Here!!</p>
+          </div>
         
        <div id="all-pets" class="lg:col-span-3 md:col-span-4  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         
        </div>
-      <div>
+       <div>
         <div id="liked-photo" class="ml-4 col-span-1 grid grid-cols-2 gap-3 mb-3"  >
         
         </div>
